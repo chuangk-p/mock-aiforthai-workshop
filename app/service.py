@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Header, File, UploadFile, Form
 from fastapi.responses import PlainTextResponse, JSONResponse, Response
 from typing import Optional
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -10,7 +11,6 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageMessage
 )
-
 
 from aift import setting
 from aift.multimodal import textqa
@@ -54,7 +54,7 @@ def handle_text_message(event):
 
     # aiforthai multimodal chat
     text = textqa.chat(event.message.text, result+AIFORTHAI_APIKEY)['response']
-    
+
     # return text response
     send_message(event,text)
 
